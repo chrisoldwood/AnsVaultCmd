@@ -46,7 +46,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Mechanisms\Source\Mechanisms\Mechanisms.csproj">
+      <Project>{0A7BA255-4199-411C-A27A-8DF791D0AB8D}</Project>
+      <Name>Mechanisms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VaultCmd\VaultCmd.csproj">
+      <Project>{8D20F8DC-F081-40A2-8B45-B376A56D7A7A}</Project>
+      <Name>VaultCmd</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
