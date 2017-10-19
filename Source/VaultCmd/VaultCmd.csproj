@@ -51,7 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Mechanisms\Source\Mechanisms\Mechanisms.csproj">
+    <ProjectReference Include="..\Mechanisms\Source\Mechanisms\Mechanisms.csproj">
       <Project>{0A7BA255-4199-411C-A27A-8DF791D0AB8D}</Project>
       <Name>Mechanisms</Name>
     </ProjectReference>

@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaultCmd", "Source\VaultCmd
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Source\Tests\Tests.csproj", "{CB9B0623-41E6-444D-9DFC-4A94CAAEBC99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mechanisms", "..\Mechanisms\Source\Mechanisms\Mechanisms.csproj", "{0A7BA255-4199-411C-A27A-8DF791D0AB8D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mechanisms", "Source\Mechanisms\Source\Mechanisms\Mechanisms.csproj", "{0A7BA255-4199-411C-A27A-8DF791D0AB8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
