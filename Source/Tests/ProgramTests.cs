@@ -33,7 +33,7 @@ namespace Tests
 
                 VaultCmd.Program.AppMain(helpArg, AnyStdIn, stdOut, AnyStdErr);
 
-                Assert.True(stdOut.ToString().Contains("Usage"));
+                Assert.True(stdOut.ToString().Contains("USAGE"));
             });
 
             "Requesting the version returns 0".Is(() =>

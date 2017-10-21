@@ -24,15 +24,19 @@ namespace VaultCmd
 
             var switches = new[]
             {
-                new Switch(help, "h", "help"),
-                new Switch(version, Switch.NoShortName, "version"),
+                new Switch(help, "h", "help", "Show program usage"),
+                new Switch(version, Switch.NoShortName, "version", "Show program version"),
             };
 
             var arguments = CommandLineParser.Parse(args, switches);
 
             if (arguments.IsSet(help))
             {
-                stdout.WriteLine("Usage: VaultCmd [options...]");
+                stdout.WriteLine();
+                stdout.WriteLine("USAGE: VaultCmd [options...]");
+                stdout.WriteLine();
+                foreach (var line in CommandLineParser.FormatSwitches(switches))
+                    stdout.WriteLine(line);
                 return ExitCode.Success;
             }
 
