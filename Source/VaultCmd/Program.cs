@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Mechanisms.Host;
@@ -19,34 +20,60 @@ namespace VaultCmd
 
         internal static int AppMain(string[] args, TextReader stdin, TextWriter stdout, TextWriter stderr)
         {
-            const int help = 1;
-            const int version = 2;
+            var arguments = CommandLineParser.Parse(args, Switches);
 
-            var switches = new[]
+            if (arguments.IsSet(HelpSwitch))
             {
-                new Switch(help, "h", "help", "Show program usage"),
-                new Switch(version, Switch.NoShortName, "version", "Show program version"),
-            };
-
-            var arguments = CommandLineParser.Parse(args, switches);
-
-            if (arguments.IsSet(help))
-            {
-                stdout.WriteLine();
-                stdout.WriteLine("USAGE: VaultCmd [options...]");
-                stdout.WriteLine();
-                foreach (var line in CommandLineParser.FormatSwitches(switches))
-                    stdout.WriteLine(line);
+                ShowUsage(stdout);
                 return ExitCode.Success;
             }
 
-            if (arguments.IsSet(version))
+            if (arguments.IsSet(VersionSwitch))
             {
                 stdout.WriteLine(Assembly.GetExecutingAssembly().GetName().Version.ToString());
                 return ExitCode.Success;
             }
 
-            return ExitCode.Failure;
+            if (!arguments.IsSet(PasswordSwitch))
+            {
+                stdout.WriteLine("ERROR: No vault password specified [--password]");
+                ShowUsage(stdout);
+                return ExitCode.Failure;
+            }
+
+            string password = arguments.Value(PasswordSwitch);
+            var ciphertext = new List<string>();
+            string input;
+
+            while((input = stdin.ReadLine()) != null)
+                ciphertext.Add(input);
+
+            var plaintext = Decrypter.Decypt(ciphertext, password);
+
+            foreach (var output in plaintext)
+                stdout.WriteLine(output);
+
+            return ExitCode.Success;
         }
+
+        private static void ShowUsage(TextWriter stdout)
+        {
+            stdout.WriteLine();
+            stdout.WriteLine("USAGE: VaultCmd [options...]");
+            stdout.WriteLine();
+            foreach (var line in CommandLineParser.FormatSwitches(Switches))
+                stdout.WriteLine(line);
+        }
+
+        private const int HelpSwitch = 1;
+        private const int VersionSwitch = 2;
+        private const int PasswordSwitch = 3;
+
+        private static readonly Switch[] Switches = new[]
+        {
+            new Switch(HelpSwitch, "h", "help", "Show program usage"),
+            new Switch(VersionSwitch, Switch.NoShortName, "version", "Show program version"),
+            new Switch(PasswordSwitch, "p", "password", Switch.ValueType.Value, "The vault password"),
+        };
     }
 }
