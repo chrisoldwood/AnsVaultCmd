@@ -1,5 +1,5 @@
 ﻿- Read/write to/from a file.
 
-- Validate vault format.
-
 - Treat vault file as key/value store.
+
+- Don't assume output is lines of text.

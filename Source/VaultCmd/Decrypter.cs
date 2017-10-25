@@ -5,16 +5,31 @@ using System.Security.Cryptography;
 using System.Text;
 using Mechanisms.Extensions;
 
+// ReSharper disable ParameterTypeCanBeEnumerable.Local
+
 namespace VaultCmd
 {
     public static class Decrypter
     {
         public static IEnumerable<string> Decypt(IEnumerable<string> input, string password)
         {
-            var header = input.First();
+            var file = input.ToArray();
+            var header = file.First();
             var fields = header.Split(';');
 
-            var hexPayload = string.Join("", input.Skip(1).ToArray());
+            if (fields.Length != 3)
+                throw new InvalidVaultException("Unsupported file header field count: {0}".Fmt(fields.Length));
+
+            if (fields[0] != "$ANSIBLE_VAULT")
+                throw new InvalidVaultException("Unsupported type in file header: {0}".Fmt(fields[0]));
+
+            if (fields[1] != "1.1")
+                throw new InvalidVaultException("Unsupported version in file header: {0}".Fmt(fields[1]));
+
+            if (fields[2] != "AES256")
+                throw new InvalidVaultException("Unsupported cipher in file header: {0}".Fmt(fields[1]));
+
+            var hexPayload = string.Join("", file.Skip(1).ToArray());
             var binPayload = Encoding.UTF8.GetString(FromHex(hexPayload));
             var payloadFields = binPayload.Split('\n');
 
@@ -27,14 +42,16 @@ namespace VaultCmd
 	        const int ivLength = 16;
             const int pbkdf2KeyLength = cipherKeyLength + hmacKeyLength + ivLength;
             var passwordBytes = Encoding.UTF8.GetBytes(password);
-            var pbkdf2Key = PBKDF2Sha256GetBytes(pbkdf2KeyLength, passwordBytes, salt, 10000);
+            var pbkdf2Key = PBKDF2Sha256.GetBytes(pbkdf2KeyLength, passwordBytes, salt, 10000);
             var cipherKey = new byte[cipherKeyLength];
             Array.Copy(pbkdf2Key, 0, cipherKey, 0, cipherKeyLength);    
             var hmacKey = new byte[hmacKeyLength];
             Array.Copy(pbkdf2Key, cipherKeyLength, hmacKey, 0, hmacKeyLength);
             var cipherIv = new byte[ivLength];
             Array.Copy(pbkdf2Key, cipherKeyLength+hmacKeyLength, cipherIv, 0, ivLength);
-            /*var matches =*/ CheckMac(hmacKey, ciphertext, hmac);
+
+            if (!CheckMac(hmacKey, ciphertext, hmac))
+                throw new InvalidMacException("The MACs did not match; invalid password?");
 
             var cipher = new Aes128CounterMode(cipherIv);
             var decrypter = cipher.CreateDecryptor(cipherKey, null);
@@ -82,51 +99,5 @@ namespace VaultCmd
 
             return hash.SequenceEqual(expectedHash);
         }
-
-        // From StackOverflow: Rfc2898 / PBKDF2 with SHA256 as digest in c#
-        // https://stackoverflow.com/a/18649357/106119
-        public static byte[] PBKDF2Sha256GetBytes(int dklen, byte[] password, byte[] salt, int iterationCount){
-            using(var hmac=new System.Security.Cryptography.HMACSHA256(password)){
-                int hashLength=hmac.HashSize/8;
-                if((hmac.HashSize&7)!=0)
-                    hashLength++;
-                int keyLength=dklen/hashLength;
-                if((long)dklen>(0xFFFFFFFFL*hashLength) || dklen<0)
-                    throw new ArgumentOutOfRangeException("dklen");
-                if(dklen%hashLength!=0)
-                    keyLength++;
-                byte[] extendedkey=new byte[salt.Length+4];
-                Buffer.BlockCopy(salt,0,extendedkey,0,salt.Length);
-                using(var ms=new System.IO.MemoryStream()){
-                    for(int i=0;i<keyLength;i++){
-                        extendedkey[salt.Length]=(byte)(((i+1)>>24)&0xFF);
-                        extendedkey[salt.Length+1]=(byte)(((i+1)>>16)&0xFF);
-                        extendedkey[salt.Length+2]=(byte)(((i+1)>>8)&0xFF);
-                        extendedkey[salt.Length+3]=(byte)(((i+1))&0xFF);
-                        byte[] u=hmac.ComputeHash(extendedkey);
-                        Array.Clear(extendedkey,salt.Length,4);
-                        byte[] f=u;
-                        for(int j=1;j<iterationCount;j++){
-                            u=hmac.ComputeHash(u);
-                            for(int k=0;k<f.Length;k++){
-                                f[k]^=u[k];
-                            }
-                        }
-                        ms.Write(f,0,f.Length);
-                        Array.Clear(u,0,u.Length);
-                        Array.Clear(f,0,f.Length);
-                    }
-                    byte[] dk=new byte[dklen];
-                    ms.Position=0;
-                    ms.Read(dk,0,dklen);
-                    ms.Position=0;
-                    for(long i=0;i<ms.Length;i++){
-                        ms.WriteByte(0);
-                    }
-                    Array.Clear(extendedkey,0,extendedkey.Length);
-                    return dk;
-                }
-            }
-        }    
     }
 }

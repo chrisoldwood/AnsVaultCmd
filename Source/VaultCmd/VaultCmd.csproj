@@ -47,6 +47,9 @@
   <ItemGroup>
     <Compile Include="Aes128CounterMode.cs" />
     <Compile Include="Decrypter.cs" />
+    <Compile Include="InvalidMacException.cs" />
+    <Compile Include="InvalidVaultException.cs" />
+    <Compile Include="PBKDF2Sha256.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

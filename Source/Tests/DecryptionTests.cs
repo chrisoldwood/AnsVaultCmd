@@ -11,17 +11,7 @@ namespace Tests
         {
             "Decrypting with the correct key returns the original text".Is(() =>
             {
-                const string password = "password";
-
-                var ciphertext = new[]
-                { 
-                    "$ANSIBLE_VAULT;1.1;AES256",
-                    "65633232376535306266643337656230373531306536303761353166343434643231636664313339",
-                    "3365663032646265386239643939656636376361623863360a303737663737306231363039346366",
-                    "37643430383131313464616637396461653838343738363531633339613430386533663232346366",
-                    "3964616130336639390a313234643537613163636133346366393435343463643530626139303538",
-                    "62623665383866386664316431343834346265313564643438663532633961623562",
-                };
+                var ciphertext = ValidHeader.Concat(ValidCiphertext);
 
                 var plaintext = new[]
                 {
@@ -29,12 +19,68 @@ namespace Tests
                     "",
                 };
 
-                var output = Decrypter.Decypt(ciphertext, password).ToArray();
+                var output = Decrypter.Decypt(ciphertext, ValidPassword).ToArray();
 
                 Assert.True(output.Length == plaintext.Length);
 
                 for (int line = 0; line != plaintext.Length; ++line)
                     Assert.True(output[line] == plaintext[line]);
+            });
+
+            "Decryption fails when the header does not have 3 fields".Is(() =>
+            {
+                var invalidHeader = new[]
+                {
+                    "$ANSIBLE_VAULT;AES256",
+                };
+
+                var ciphertext = invalidHeader.Concat(ValidCiphertext);
+
+                Assert.Throws(() => Decrypter.Decypt(ciphertext, ValidPassword));
+            });
+
+            "Decryption fails when not an ansible vault file".Is(() =>
+            {
+                var invalidHeader = new[]
+                {
+                    "$SOME_OTHER_FILE;1.1;AES256",
+                };
+
+                var ciphertext = invalidHeader.Concat(ValidCiphertext);
+
+                Assert.Throws(() => Decrypter.Decypt(ciphertext, ValidPassword));
+            });
+
+            "Decryption fails when not the correct version".Is(() =>
+            {
+                var invalidHeader = new[]
+                {
+                    "$ANSIBLE_VAULT;0.0;AES256",
+                };
+
+                var ciphertext = invalidHeader.Concat(ValidCiphertext);
+
+                Assert.Throws(() => Decrypter.Decypt(ciphertext, ValidPassword));
+            });
+
+            "Decryption fails when not the correct cipher".Is(() =>
+            {
+                var invalidHeader = new[]
+                {
+                    "$ANSIBLE_VAULT;1.1;BOB123",
+                };
+
+                var ciphertext = invalidHeader.Concat(ValidCiphertext);
+
+                Assert.Throws(() => Decrypter.Decypt(ciphertext, ValidPassword));
+            });
+
+            "Decrypting with the correct key returns the original text".Is(() =>
+            {
+                const string invalidPassword = "not-the-password";
+                var ciphertext = ValidHeader.Concat(ValidCiphertext);
+
+                Assert.Throws(() => Decrypter.Decypt(ciphertext, invalidPassword));
             });
         }
 
@@ -64,5 +110,21 @@ namespace Tests
                 Assert.Throws(() => Decrypter.FromHex(hex));
             });
         }
+
+        private static readonly string[] ValidHeader = new[]
+        {
+            "$ANSIBLE_VAULT;1.1;AES256",
+        };
+
+        private static readonly string[] ValidCiphertext = new[]
+        { 
+            "65633232376535306266643337656230373531306536303761353166343434643231636664313339",
+            "3365663032646265386239643939656636376361623863360a303737663737306231363039346366",
+            "37643430383131313464616637396461653838343738363531633339613430386533663232346366",
+            "3964616130336639390a313234643537613163636133346366393435343463643530626139303538",
+            "62623665383866386664316431343834346265313564643438663532633961623562",
+        };
+
+        private const string ValidPassword = "password";
     }
 }
