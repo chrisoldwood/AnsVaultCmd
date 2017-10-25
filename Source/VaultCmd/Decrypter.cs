@@ -11,7 +11,7 @@ namespace VaultCmd
 {
     public static class Decrypter
     {
-        public static IEnumerable<string> Decypt(IEnumerable<string> input, string password)
+        public static string Decypt(IEnumerable<string> input, string password)
         {
             var file = input.ToArray();
             var header = file.First();
@@ -57,9 +57,9 @@ namespace VaultCmd
             var decrypter = cipher.CreateDecryptor(cipherKey, null);
             var outputBytes = decrypter.TransformFinalBlock(ciphertext, 0, ciphertext.Length);
             var padding = outputBytes[outputBytes.Length-1];
-            var outputText = Encoding.UTF8.GetString(outputBytes, 0, outputBytes.Length - padding);
+            var plaintext = Encoding.UTF8.GetString(outputBytes, 0, outputBytes.Length - padding);
 
-            return outputText.Split(new[]{ "\r\n" }, StringSplitOptions.None);
+            return plaintext;
         }
 
         internal static byte[] FromHex(string hex)

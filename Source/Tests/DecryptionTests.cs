@@ -12,19 +12,11 @@ namespace Tests
             "Decrypting with the correct key returns the original text".Is(() =>
             {
                 var ciphertext = ValidHeader.Concat(ValidCiphertext);
+                var plaintext = "TEST";
 
-                var plaintext = new[]
-                {
-                    "test_key: \"test_value\"",
-                    "",
-                };
+                var output = Decrypter.Decypt(ciphertext, ValidPassword);
 
-                var output = Decrypter.Decypt(ciphertext, ValidPassword).ToArray();
-
-                Assert.True(output.Length == plaintext.Length);
-
-                for (int line = 0; line != plaintext.Length; ++line)
-                    Assert.True(output[line] == plaintext[line]);
+                Assert.True(output == plaintext);
             });
 
             "Decryption fails when the header does not have 3 fields".Is(() =>
@@ -118,11 +110,11 @@ namespace Tests
 
         private static readonly string[] ValidCiphertext = new[]
         { 
-            "65633232376535306266643337656230373531306536303761353166343434643231636664313339",
-            "3365663032646265386239643939656636376361623863360a303737663737306231363039346366",
-            "37643430383131313464616637396461653838343738363531633339613430386533663232346366",
-            "3964616130336639390a313234643537613163636133346366393435343463643530626139303538",
-            "62623665383866386664316431343834346265313564643438663532633961623562",
+            "65306664396363623635396463366664353130646532316462343063336536623663306432386637",
+            "3632363837373131646265363639336132316637326534660a386438343963666565373361376163",
+            "37396630366665633332663331303963363836316632363664336339663134326465383630363433",
+            "6161336634656661370a353331666363373233373464316138376336356339366335663063653035",
+            "6162"
         };
 
         private const string ValidPassword = "password";

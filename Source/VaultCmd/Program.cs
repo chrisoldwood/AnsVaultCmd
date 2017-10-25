@@ -50,8 +50,7 @@ namespace VaultCmd
 
             var plaintext = Decrypter.Decypt(ciphertext, password);
 
-            foreach (var output in plaintext)
-                stdout.WriteLine(output);
+            stdout.Write(plaintext);
 
             return ExitCode.Success;
         }

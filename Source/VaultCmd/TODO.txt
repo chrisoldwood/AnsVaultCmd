@@ -1,5 +1,3 @@
 ﻿- Read/write to/from a file.
 
 - Treat vault file as key/value store.
-
-- Don't assume output is lines of text.
