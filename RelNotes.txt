@@ -1,0 +1,7 @@
+??/??/????: v1.0
+================
+
+- Decryption from stdin to stdout.
+
+Chris Oldwood 
+30th October 2017

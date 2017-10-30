@@ -1,3 +1,7 @@
 ﻿- Read/write to/from a file.
 
 - Treat vault file as key/value store.
+
+- Chocolatey package.
+
+- Manual.

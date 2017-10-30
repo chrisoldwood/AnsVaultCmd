@@ -1,0 +1,3 @@
+.\ReadMe.txt
+.\RelNotes.txt
+.\Source\VaultCmd\bin\Release\VaultCmd.exe
