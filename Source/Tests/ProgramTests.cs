@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Text;
+using Mechanisms.Extensions;
 using Mechanisms.Tests;
 
 namespace Tests
@@ -27,6 +29,21 @@ namespace Tests
                 var output = stdOut.ToString();
                 Assert.True(output.Contains("USAGE"));
                 Assert.True(output.Contains("--help"));
+            });
+
+            "Requesting help lists the switches".Is(() =>
+            {
+                var helpArg = new[] { "--help" };
+                var stdOut = new StringWriter();
+
+                VaultCmd.Program.AppMain(helpArg, AnyStdIn, stdOut, AnyStdErr);
+
+                var output = stdOut.ToString();
+                Assert.True(output.Contains("-h | --help"));
+                Assert.True(output.Contains("--version"));
+                Assert.True(output.Contains("-p | --password"));
+                Assert.True(output.Contains("-i | --infile"));
+                Assert.True(output.Contains("-o | --outfile"));
             });
         }
 
@@ -99,6 +116,72 @@ namespace Tests
                 var output = stdOut.ToString();
                 Assert.True(output.Contains(ValidPlainText));
             });
+
+            "The ciphertext can be read from a file instead".Is(() =>
+            {
+                var inputFile = CreateCiphertextTestFile();
+
+                try
+                {
+                    var args = new[] { "--password", ValidPassword, "--infile", inputFile };
+                    var emptyStdIn = new StringReader("");
+                    var stdOut = new StringWriter();
+
+                    VaultCmd.Program.AppMain(args, emptyStdIn, stdOut, AnyStdErr);
+
+                    var output = stdOut.ToString();
+                    Assert.True(output.Contains(ValidPlainText));
+                }
+                finally
+                {
+                    File.Delete(inputFile);
+                }
+            });
+
+            "An invalid ciphertext file generates an error".Is(() =>
+            {
+                var inputFile = CreateMissingTempFile();
+                var args = new[] { "--password", ValidPassword, "--infile", inputFile };
+                var emptyStdIn = new StringReader("");
+                var stdOut = new StringWriter();
+
+                Assert.Throws(() => VaultCmd.Program.AppMain(args, emptyStdIn, stdOut, AnyStdErr));
+            });
+
+            "The plaintext can be written to a file instead".Is(() =>
+            {
+                var outputFile = Path.GetTempFileName();
+
+                try
+                {
+                    var args = new[] { "--password", ValidPassword, "--outfile", outputFile };
+                    var stdIn = CreateCiphertextInput();
+                    var stdOut = new StringWriter();
+
+                    VaultCmd.Program.AppMain(args, stdIn, stdOut, AnyStdErr);
+
+
+                    var plaintext = File.ReadAllText(outputFile);
+                    Assert.True(plaintext == ValidPlainText);
+
+                    var output = stdOut.ToString();
+                    Assert.True(output.IsEmpty());
+                }
+                finally
+                {
+                    File.Delete(outputFile);
+                }
+            });
+
+            "An invalid plaintext file generates an error".Is(() =>
+            {
+                var outputFile = Path.GetTempPath();
+                var args = new[] { "--password", ValidPassword, "--outfile", outputFile };
+                var stdIn = CreateCiphertextInput();
+                var stdOut = new StringWriter();
+
+                Assert.Throws(() => VaultCmd.Program.AppMain(args, stdIn, stdOut, AnyStdErr));
+            });
         }
 
         private static TextReader CreateCiphertextInput()
@@ -106,6 +189,25 @@ namespace Tests
             var ciphertext = string.Join("\r\n", ValidCiphertext);
 
             return new StringReader(ciphertext); 
+        }
+
+        private static string CreateCiphertextTestFile()
+        {
+            var inputFile = Path.GetTempFileName();
+            var ciphertext = string.Join("\r\n", ValidCiphertext);
+
+            File.WriteAllText(inputFile, ciphertext, Encoding.ASCII);
+
+            return inputFile;
+        }
+
+        private static string CreateMissingTempFile()
+        {
+            var filename = Path.GetTempFileName();
+
+            File.Delete(filename);
+
+            return filename;
         }
 
         private static readonly TextReader AnyStdIn = new StringReader("");
