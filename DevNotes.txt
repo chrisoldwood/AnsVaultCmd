@@ -17,7 +17,7 @@ The following command will clone the solution, including the submodules:-
 Command Line Builds
 -------------------
 
-To peform a release build:-
+To perform a release build:-
 
 > pushd VaultCmd
 > Build
