@@ -67,7 +67,7 @@ namespace Tests
                 Assert.Throws(() => Decrypter.Decypt(ciphertext, ValidPassword));
             });
 
-            "Decrypting with the correct key returns the original text".Is(() =>
+            "Decryption fails when the password is incorrect".Is(() =>
             {
                 const string invalidPassword = "not-the-password";
                 var ciphertext = ValidHeader.Concat(ValidCiphertext);
