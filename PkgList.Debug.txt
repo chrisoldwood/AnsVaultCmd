@@ -1,0 +1,6 @@
+.\ReadMe.txt
+.\RelNotes.txt
+.\Source\VaultCmd\bin\Debug\*.exe
+.\Source\VaultCmd\bin\Debug\*.dll
+.\Source\VaultCmd\bin\Debug\*.pdb
+.\Source\VaultCmd\VaultCmd.html

@@ -17,7 +17,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{F207F584-6C40-40AE-9824-E31DC2CB5AB6}"
 	ProjectSection(SolutionItems) = preProject
 		Build.cmd = Build.cmd
+		BuildZip.cmd = BuildZip.cmd
 		Clean.cmd = Clean.cmd
+		PkgList.Debug.txt = PkgList.Debug.txt
 		PkgList.Release.txt = PkgList.Release.txt
 	EndProjectSection
 EndProject

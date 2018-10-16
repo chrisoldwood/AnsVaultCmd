@@ -2,22 +2,19 @@ Development Structure
 ---------------------
 
 +-VaultCmd
-| +-Source
-|   +-Mechanisms (submodule)
-|   +-Tests
-|   +-VaultCmd
-+-Scripts
+  +-Source
+    +-Mechanisms (submodule)
+    +-Tests
+    +-VaultCmd
 
-The following command will clone the solution, including the submodules:-
+The following command will clone the solution, including the submodules:
 
 > git clone --recursive https://github.com/chrisoldwood/VaultCmd.git VaultCmd
-<optional>
-> git clone https://github.com/chrisoldwood/Scripts.git Scripts
 
 Command Line Builds
 -------------------
 
-To perform a release build:-
+To perform a release build:
 
 > pushd VaultCmd
 > Build
@@ -25,16 +22,16 @@ To perform a release build:-
 Tests
 -----
 
-You can run the unit tests with:-
+You can run the unit tests with:
 
 > Source\Tests\bin\Release\Tests.exe
 
 Packages
 --------
 
-The simple .zip file package can be built like so:-
+The simple .zip file package can be built like so:
 
-> ..\Scripts\BuildZip.cmd release .
+> BuildZip release
 
 Release Checklist
 -----------------
@@ -47,4 +44,4 @@ Release Checklist
 - Upload packages.
 
 Chris Oldwood 
-30th October 2017
+16th October 2018
