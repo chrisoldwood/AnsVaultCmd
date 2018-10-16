@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using Mechanisms.Host;
 
@@ -12,36 +10,19 @@ namespace VaultCmd
     {
         public static int Main(string[] args)
         {
-            return Bootstrapper.Run(AppMain, args);
+            return AppMain(args, new IOStreams());
         }
 
-        internal static int AppMain(string[] args)
+        internal static int AppMain(string[] args, IOStreams streams)
         {
-            return AppMain(args, Console.In, Console.Out, Console.Error);
+            var parser = new CommandLineParser(args, Switches);
+            return Bootstrapper.Run(AppMain, parser, streams);
         }
 
-        internal static int AppMain(string[] args, TextReader stdin, TextWriter stdout, TextWriter stderr)
+        internal static int AppMain(Arguments arguments, IOStreams streams)
         {
-            var arguments = CommandLineParser.Parse(args, Switches);
-
-            if (arguments.IsSet(HelpSwitch))
-            {
-                ShowUsage(stdout);
-                return ExitCode.Success;
-            }
-
-            if (arguments.IsSet(VersionSwitch))
-            {
-                stdout.WriteLine(Assembly.GetExecutingAssembly().GetName().Version.ToString());
-                return ExitCode.Success;
-            }
-
             if (!arguments.IsSet(PasswordSwitch))
-            {
-                stdout.WriteLine("ERROR: No vault password specified [--password]");
-                ShowUsage(stdout);
-                return ExitCode.Failure;
-            }
+                throw new CmdLineException("ERROR: No vault password specified [--password]");
 
             string password = arguments.Value(PasswordSwitch);
             var ciphertext = new List<string>();
@@ -50,7 +31,7 @@ namespace VaultCmd
             {
                 string input;
 
-                while((input = stdin.ReadLine()) != null)
+                while((input = streams.StdIn.ReadLine()) != null)
                     ciphertext.Add(input);
             }
             else
@@ -65,7 +46,7 @@ namespace VaultCmd
 
             if (!arguments.IsSet(OutFileSwitch))
             {
-                stdout.Write(plaintext);
+                streams.StdOut.Write(plaintext);
             }
             else
             {
@@ -77,17 +58,8 @@ namespace VaultCmd
             return ExitCode.Success;
         }
 
-        private static void ShowUsage(TextWriter stdout)
-        {
-            stdout.WriteLine();
-            stdout.WriteLine("USAGE: VaultCmd [options...]");
-            stdout.WriteLine();
-            foreach (var line in CommandLineParser.FormatSwitches(Switches))
-                stdout.WriteLine(line);
-        }
-
-        private const int HelpSwitch = 1;
-        private const int VersionSwitch = 2;
+        private const int HelpSwitch = CommandLineParser.HelpSwitch;
+        private const int VersionSwitch = CommandLineParser.VersionSwitch;
         private const int PasswordSwitch = 3;
         private const int InFileSwitch = 4;
         private const int OutFileSwitch = 5;
