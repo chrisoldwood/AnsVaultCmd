@@ -1,0 +1,92 @@
+<!doctype html public "-//w3c//dtd xhtml 1.0 strict//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-strict.dtd">
+<html>
+
+<head>
+<title>VaultCmd Manual</title>
+<meta name="author" content="Chris Oldwood">
+<style>
+body	{ font-family: Verdana, Arial; font-size: 10pt }
+table	{ border-collapse: collapse }
+th		{ font-family: Verdana, Arial; font-size: 10pt; border: 1px solid black }
+td		{ font-family: Verdana, Arial; font-size: 10pt; border: 1px solid black; vertical-align: top; padding: 5px }
+</style>
+</head>
+
+<body>
+
+<h3 align="center">VaultCmd v1.0</h3>
+
+<a name="Introduction"></a>
+<h4>Introduction</h4>
+
+<p>
+This is a command line (aka console) based tool for decrypting Ansible vault
+files. You can either pipe the encrypted vault file in via the standard input
+stream or pass it the name of a file with <code>--infile</code>. You will of
+course also need to provide the password (i.e. key) to unlock the vault with
+the <code>--password</code> switch. Similarly the output goes to the standard
+output by default or you can specify the name of a file to write to with
+<code>--outfile</code>.
+</p>
+
+<a name="PipingDataExample"></a>
+<h4>Example: Piping Data In &amp; Out</h4>
+
+<p>
+By default the program reads and writes to the standard inout and output streams
+so you need only provide the password.
+</p>
+<pre>
+> type ciphertext.txt | VaultCmd.exe --password password
+TEST
+</pre>
+
+<a name="FilesExample"></a>
+<h4>Example: Reading &amp; Writing Files</h4>
+
+<p>
+Alternatively you can replace either stream with a filename and redirect the
+input or output there instead (instead of using the shel to do the redirection).
+You can use the <code>--infile</code> and <code>--outfile</code> switches
+independently so that you can mix-and-match the source and destination
+</p>
+<pre>
+> VaultCmd.exe --infile ciphertext.txt --password password --outfile "%TEMP%\plaintext.txt"
+> type "%TEMP%\plaintext.txt"
+TEST
+</pre>
+
+<hr>
+
+<a name="Warranty"></a>
+<h4>License &amp; Warranty</h4>
+
+<p>
+This application is freeware - you get what you pay for, nothing more, nothing
+less.
+</p>
+
+<a name="SourceCode"></a>
+<h4>Source Code</h4>
+
+<p>
+The full source code (C#) is available from my web site listed below.
+</p>
+
+<a name="Contact"></a>
+<h4>Contact Details</h4>
+
+<p>
+Using the --version switch will also display my contact details. Please check the
+web site for updates.
+</p><p>
+Email: <a href="mailto://gort@cix.co.uk">gort@cix.co.uk</a><br>
+Web: <a href="http://www.chrisoldwood.com">www.chrisoldwood.com</a><br>
+</p><p>
+Chris Oldwood<br>
+16th October 2018<br>
+</p>
+
+</body>
+
+</html>

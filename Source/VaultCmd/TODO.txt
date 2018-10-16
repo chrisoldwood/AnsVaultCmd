@@ -2,4 +2,4 @@
 
 - Chocolatey package.
 
-- Manual.
+- Read password from stdin.
