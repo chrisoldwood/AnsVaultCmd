@@ -10,19 +10,30 @@ setlocal enabledelayedexpansion
 if /i "%~1" == "-?"     call :usage & exit /b 0
 if /i "%~1" == "--help" call :usage & exit /b 0
 
-:check_args
-if /i "%~1" == "" call :usage & exit /b 1
-
 set configuration=Release
+set suffix=r
 
-if /i "%1" == "debug" set configuration=Debug
-if /i "%1" == "release" set configuration=Release
+if /i "%1" == "debug" (
+set configuration=Debug
+set suffix=d
+)
+if /i "%1" == "release" (
+set configuration=Release
+set suffix=r
+)
 
 :build
 if not exist "Packages" mkdir Packages
 if errorlevel 1 exit /b 1
 
-set zipfile=Packages\VaultCmd-%configuration%.zip
+set getVersion=^
+Get-ChildItem .\Source\VaultCmd\bin\%configuration%\VaultCmd.exe ^|^
+ ForEach { $_.VersionInfo.FileVersion } ^|^
+ ForEach { $_ -replace '\.[0-9]+$','' } ^|^
+ ForEach { $_ -replace '\.','' }
+for /f "usebackq" %%v in (`PowerShell "%getVersion%"`) do set version=%%v
+
+set zipfile=Packages\vaultcmd%version%%suffix%.zip
 set filelist=PkgList.%configuration%.txt
 
 if exist "%zipfile%" del "%zipfile%"

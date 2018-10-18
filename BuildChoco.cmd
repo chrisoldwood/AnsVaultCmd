@@ -38,7 +38,8 @@ for /f %%f in (PkgList.txt) do (
 	copy /y "%%f" "bin\." 1>nul
 )
 
-choco pack
+set packageFolder=..\Packages
+choco pack --out "%packageFolder%"
 if %errorlevel% neq 0 popd & exit /b 1
 
 :success
