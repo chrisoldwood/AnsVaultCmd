@@ -31,7 +31,13 @@ Packages
 
 The simple .zip file package can be built like so:
 
-> BuildZip release
+> BuildZip
+
+The Chocolatey package requires some manual editing to insert the checksum:
+
+> checksum -t sha256 Source\VaultCmd\bin\Release\VaultCmd.exe
+> notepad Chocolatey\VERIFICATION.txt 
+> BuildChoco
 
 Release Checklist
 -----------------
@@ -39,7 +45,7 @@ Release Checklist
 - Update version number (AssemblyInfo.cs).
 - Update documentation (ReadMe.txt, RelNotes.txt and manual).
 - Build and run tests.
-- Build packages (Zip).
+- Build packages (Zip and Chocolatey).
 - Tag repository.
 - Upload packages.
 
