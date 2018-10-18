@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>vaultcmd</id>
+    <version>1.0</version>
+    <packageSourceUrl>https://github.com/chrisoldwood/VaultCmd/tree/master/Chocolatey</packageSourceUrl>
+    <owners>Chris Oldwood</owners>
+    <title>Vault Command</title>
+    <authors>Chris Oldwood</authors>
+    <projectUrl>http://www.chrisoldwood.com/win32.htm#vaultcommand</projectUrl>
+    <copyright>Chris Oldwood 2018</copyright>
+    <projectSourceUrl>https://github.com/chrisoldwood/VaultCmd</projectSourceUrl>
+    <licenseUrl>http://www.chrisoldwood.com/default.htm#licence</licenseUrl>
+    <docsUrl>http://www.chrisoldwood.com/win32/vaultcmd/vaultcmd.html</docsUrl>
+    <tags>Ansible</tags>
+    <summary>A command line tool for decrypting Ansible vault files</summary>
+    <description>This utility allows you to decrypt Ansible vault files without needing Ansible to be installed, e.g. on Windows hosts.</description>
+    <releaseNotes>http://www.chrisoldwood.com/win32/vaultcmd/relnotes.txt</releaseNotes>
+  </metadata>
+  <files>
+    <file src="bin\**" target="bin" />
+  </files>
+</package>
