@@ -33,7 +33,7 @@ Get-ChildItem .\Source\VaultCmd\bin\%configuration%\VaultCmd.exe ^|^
  ForEach { $_ -replace '\.','' }
 for /f "usebackq" %%v in (`PowerShell "%getVersion%"`) do set version=%%v
 
-set zipfile=Packages\vaultcmd%version%%suffix%.zip
+set zipfile=Packages\vaultcmd-%version%%suffix%.zip
 set filelist=PkgList.%configuration%.txt
 
 if exist "%zipfile%" del "%zipfile%"
