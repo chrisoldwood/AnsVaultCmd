@@ -8,15 +8,15 @@
     <owners>Chris Oldwood</owners>
     <title>Vault Command</title>
     <authors>Chris Oldwood</authors>
-    <projectUrl>http://www.chrisoldwood.com/win32.htm#vaultcommand</projectUrl>
+    <projectUrl>http://www.chrisoldwood.com/dotnet.htm#vaultcommand</projectUrl>
     <copyright>Chris Oldwood 2018</copyright>
     <projectSourceUrl>https://github.com/chrisoldwood/VaultCmd</projectSourceUrl>
     <licenseUrl>http://www.chrisoldwood.com/default.htm#licence</licenseUrl>
-    <docsUrl>http://www.chrisoldwood.com/win32/vaultcmd/vaultcmd.html</docsUrl>
+    <docsUrl>http://www.chrisoldwood.com/dotnet/vaultcmd/vaultcmd.html</docsUrl>
     <tags>Ansible</tags>
     <summary>A command line tool for decrypting Ansible vault files</summary>
     <description>This utility allows you to decrypt Ansible vault files without needing Ansible to be installed, e.g. on Windows hosts.</description>
-    <releaseNotes>http://www.chrisoldwood.com/win32/vaultcmd/relnotes.txt</releaseNotes>
+    <releaseNotes>http://www.chrisoldwood.com/dotnet/vaultcmd/relnotes.txt</releaseNotes>
   </metadata>
   <files>
     <file src="bin\**" target="bin" />

@@ -1,3 +1,2 @@
-See: Wheaton's Law.
-
-http://knowyourmeme.com/memes/wheatons-law
+If you're reading this you already know how to behave responsibly with open
+source software, so just go right on doing just that.

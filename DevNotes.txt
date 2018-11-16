@@ -38,6 +38,7 @@ The Chocolatey package requires some manual editing to insert the checksum:
 > checksum -t sha256 Source\VaultCmd\bin\Release\VaultCmd.exe
 > notepad Chocolatey\VERIFICATION.txt 
 > BuildChoco
+> TortoiseGitProc /command:export
 
 Release Checklist
 -----------------
@@ -45,9 +46,9 @@ Release Checklist
 - Update version number (AssemblyInfo.cs).
 - Update documentation (ReadMe.txt, RelNotes.txt and manual).
 - Build and run tests.
-- Build packages (Zip and Chocolatey).
-- Tag repository.
+- Build packages (Zip, Chocolatey and source zip).
 - Upload packages.
+- Tag repository.
 
 Chris Oldwood 
-16th October 2018
+19th October 2018
