@@ -41,7 +41,8 @@ The Chocolatey package requires some manual editing to insert the checksum:
 
 Before zipping the source snapshot, we need a .git free copy:
 
-> TortoiseGitProc /command:export
+> clean --all
+> 7za a -tzip -bd Packages\ansvaultcmd-100s.zip . -xr!.git -xr!bin -xr!obj -xr!Packages
 
 Release Checklist
 -----------------
