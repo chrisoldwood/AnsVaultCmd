@@ -1,10 +1,13 @@
-VaultCmd
-========
+AnsVaultCmd
+===========
 
 Introduction
 ------------
 
 A .Net based tool for decrypting Ansible vault files.
+
+Note: this tool was originally published as "VaultCmd" which happens to be the
+name of a built-in Windows command line tool for managing credentials.
 
 Credits
 -------

@@ -4,7 +4,7 @@
 // ReSharper disable RedundantCast
 // ReSharper disable SuggestUseVarKeywordEvident
 
-namespace VaultCmd
+namespace AnsVaultCmd
 {
     public static class PBKDF2Sha256
     {

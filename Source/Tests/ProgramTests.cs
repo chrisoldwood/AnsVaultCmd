@@ -15,7 +15,7 @@ namespace Tests
             {
                 var helpArg = new[] { "--help" };
 
-                var exitCode = VaultCmd.Program.AppMain(helpArg, AnyStreams);
+                var exitCode = AnsVaultCmd.Program.AppMain(helpArg, AnyStreams);
 
                 Assert.True(exitCode == 0);
             });
@@ -25,7 +25,7 @@ namespace Tests
                 var helpArg = new[] { "--help" };
                 var stdOut = new StringWriter();
 
-                VaultCmd.Program.AppMain(helpArg, new IOStreams(AnyStdIn, stdOut, AnyStdErr));
+                AnsVaultCmd.Program.AppMain(helpArg, new IOStreams(AnyStdIn, stdOut, AnyStdErr));
 
                 var output = stdOut.ToString();
                 Assert.True(output.Contains("USAGE"));
@@ -37,7 +37,7 @@ namespace Tests
                 var helpArg = new[] { "--help" };
                 var stdOut = new StringWriter();
 
-                VaultCmd.Program.AppMain(helpArg, new IOStreams(AnyStdIn, stdOut, AnyStdErr));
+                AnsVaultCmd.Program.AppMain(helpArg, new IOStreams(AnyStdIn, stdOut, AnyStdErr));
 
                 var output = stdOut.ToString();
                 Assert.True(output.Contains("-h | --help"));
@@ -55,7 +55,7 @@ namespace Tests
             {
                 var versionArg = new[] { "--version" };
 
-                var exitCode = VaultCmd.Program.AppMain(versionArg, AnyStreams);
+                var exitCode = AnsVaultCmd.Program.AppMain(versionArg, AnyStreams);
 
                 Assert.True(exitCode == 0);
             });
@@ -65,7 +65,7 @@ namespace Tests
                 var versionArg = new[] { "--version" };
                 var stdOut = new StringWriter();
 
-                VaultCmd.Program.AppMain(versionArg, new IOStreams(AnyStdIn, stdOut, AnyStdErr));
+                AnsVaultCmd.Program.AppMain(versionArg, new IOStreams(AnyStdIn, stdOut, AnyStdErr));
 
                 var output = stdOut.ToString();
                 Assert.True(output.Contains("0.0.0.1"));
@@ -79,7 +79,7 @@ namespace Tests
             {
                 var noArgs = new string[0];
 
-                var exitCode = VaultCmd.Program.AppMain(noArgs, AnyStreams);
+                var exitCode = AnsVaultCmd.Program.AppMain(noArgs, AnyStreams);
 
                 Assert.True(exitCode != 0);
             });
@@ -90,7 +90,7 @@ namespace Tests
                 var stdOut = new StringWriter();
                 var stdErr = new StringWriter();
 
-                VaultCmd.Program.AppMain(noArgs, new IOStreams(AnyStdIn, stdOut, stdErr));
+                AnsVaultCmd.Program.AppMain(noArgs, new IOStreams(AnyStdIn, stdOut, stdErr));
 
                 Assert.True(stdErr.ToString().Contains("ERROR:"));
                 Assert.True(stdOut.ToString().Contains("USAGE"));
@@ -101,7 +101,7 @@ namespace Tests
                 var passwordOnlyArgs = new[] { "--password", ValidPassword };
                 var stdIn = CreateCiphertextInput();
 
-                var exitCode = VaultCmd.Program.AppMain(passwordOnlyArgs, new IOStreams(stdIn, AnyStdOut, AnyStdErr));
+                var exitCode = AnsVaultCmd.Program.AppMain(passwordOnlyArgs, new IOStreams(stdIn, AnyStdOut, AnyStdErr));
 
                 Assert.True(exitCode == 0);
             });
@@ -112,7 +112,7 @@ namespace Tests
                 var stdIn = CreateCiphertextInput();
                 var stdOut = new StringWriter();
 
-                VaultCmd.Program.AppMain(passwordOnlyArgs, new IOStreams(stdIn, stdOut, AnyStdErr));
+                AnsVaultCmd.Program.AppMain(passwordOnlyArgs, new IOStreams(stdIn, stdOut, AnyStdErr));
 
                 var output = stdOut.ToString();
                 Assert.True(output.Contains(ValidPlainText));
@@ -128,7 +128,7 @@ namespace Tests
                     var emptyStdIn = new StringReader("");
                     var stdOut = new StringWriter();
 
-                    VaultCmd.Program.AppMain(args, new IOStreams(emptyStdIn, stdOut, AnyStdErr));
+                    AnsVaultCmd.Program.AppMain(args, new IOStreams(emptyStdIn, stdOut, AnyStdErr));
 
                     var output = stdOut.ToString();
                     Assert.True(output.Contains(ValidPlainText));
@@ -146,7 +146,7 @@ namespace Tests
                 var emptyStdIn = new StringReader("");
                 var stdErr = new StringWriter();
 
-                var exitCode = VaultCmd.Program.AppMain(args, new IOStreams(emptyStdIn, AnyStdOut, stdErr));
+                var exitCode = AnsVaultCmd.Program.AppMain(args, new IOStreams(emptyStdIn, AnyStdOut, stdErr));
 
                 Assert.True(exitCode != 0);
                 Assert.False(stdErr.ToString().IsEmpty());
@@ -162,7 +162,7 @@ namespace Tests
                     var stdIn = CreateCiphertextInput();
                     var stdOut = new StringWriter();
 
-                    VaultCmd.Program.AppMain(args, new IOStreams(stdIn, stdOut, AnyStdErr));
+                    AnsVaultCmd.Program.AppMain(args, new IOStreams(stdIn, stdOut, AnyStdErr));
 
 
                     var plaintext = File.ReadAllText(outputFile);
@@ -184,7 +184,7 @@ namespace Tests
                 var stdIn = CreateCiphertextInput();
                 var stdErr = new StringWriter();
 
-                var exitCode = VaultCmd.Program.AppMain(args, new IOStreams(stdIn, AnyStdOut, stdErr));
+                var exitCode = AnsVaultCmd.Program.AppMain(args, new IOStreams(stdIn, AnyStdOut, stdErr));
 
                 Assert.True(exitCode != 0);
                 Assert.False(stdErr.ToString().IsEmpty());

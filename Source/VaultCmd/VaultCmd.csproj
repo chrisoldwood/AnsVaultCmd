@@ -8,8 +8,8 @@
     <ProjectGuid>{8D20F8DC-F081-40A2-8B45-B376A56D7A7A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VaultCmd</RootNamespace>
-    <AssemblyName>VaultCmd</AssemblyName>
+    <RootNamespace>AnsVaultCmd</RootNamespace>
+    <AssemblyName>AnsVaultCmd</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TODO.txt" />
-    <Content Include="VaultCmd.html" />
+    <Content Include="AnsVaultCmd.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

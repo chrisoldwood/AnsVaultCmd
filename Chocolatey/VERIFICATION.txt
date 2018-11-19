@@ -3,16 +3,16 @@ Verification is intended to assist the Chocolatey moderators and community in
 verifying that this package's contents are trustworthy.
 
 The software in this package has been downloaded from the following location:
-http://www.chrisoldwood.com/dotnet.htm#vaultcommand
+http://www.chrisoldwood.com/dotnet.htm#ansvaultcommand
 
 It can be verified by performing the following:
 
 1. Download the original binary from:
-   http://www.chrisoldwood.com/dotnet/vaultcmd/vaultcmd-100r.zip
+   http://www.chrisoldwood.com/dotnet/ansvaultcmd/ansvaultcmd-100r.zip
    
 2. Generate the checksum using one of the following methods:
-  - Using the PowerShell function: 'Get-FileHash VaultCmd.exe'
-  - Using the chocolatey utility: 'checksum -t sha256 VaultCmd.exe'
+  - Using the PowerShell function: 'Get-FileHash AnsVaultCmd.exe'
+  - Using the chocolatey utility: 'checksum -t sha256 AnsVaultCmd.exe'
 
 3. The checksums should match the following:
 
@@ -20,4 +20,4 @@ It can be verified by performing the following:
   checksum: 90BC803BCA5121035CE63FF4ED37D43731621C115CD669D20ACEEB7B49804BDE
 
 The file 'LICENSE.txt' was obtained from the source code repository at:
-https://github.com/chrisoldwood/VaultCmd/blob/master/Chocolatey/LICENSE.txt
+https://github.com/chrisoldwood/AnsVaultCmd/blob/master/Chocolatey/LICENSE.txt

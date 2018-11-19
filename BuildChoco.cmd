@@ -18,7 +18,7 @@ if !errorlevel! neq 0 (
 	exit /b 1
 )
 
-set nuspecFile=vaultcmd.nuspec
+set nuspecFile=Ansvaultcmd.nuspec
 if not exist "%nuspecFile%" (
 	echo ERROR: "%nuspecFile%" missing
 	popd & exit /b 1

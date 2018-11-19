@@ -27,13 +27,13 @@ if not exist "Packages" mkdir Packages
 if errorlevel 1 exit /b 1
 
 set getVersion=^
-Get-ChildItem .\Source\VaultCmd\bin\%configuration%\VaultCmd.exe ^|^
+Get-ChildItem .\Source\AnsVaultCmd\bin\%configuration%\AnsVaultCmd.exe ^|^
  ForEach { $_.VersionInfo.FileVersion } ^|^
  ForEach { $_ -replace '\.[0-9]+$','' } ^|^
  ForEach { $_ -replace '\.','' }
 for /f "usebackq" %%v in (`PowerShell "%getVersion%"`) do set version=%%v
 
-set zipfile=Packages\vaultcmd-%version%%suffix%.zip
+set zipfile=Packages\ansvaultcmd-%version%%suffix%.zip
 set filelist=PkgList.%configuration%.txt
 
 if exist "%zipfile%" del "%zipfile%"

@@ -2,11 +2,11 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("VaultCmd")]
+[assembly: AssemblyTitle("AnsVaultCmd")]
 [assembly: AssemblyDescription("Ansible vault reader")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("VaultCmd")]
+[assembly: AssemblyProduct("AnsVaultCmd")]
 [assembly: AssemblyCopyright("Copyright © Chris Oldwood 2017-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -7,7 +7,7 @@ using Mechanisms.Extensions;
 
 // ReSharper disable ParameterTypeCanBeEnumerable.Local
 
-namespace VaultCmd
+namespace AnsVaultCmd
 {
     public static class Decrypter
     {

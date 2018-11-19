@@ -1,7 +1,7 @@
 ..\RelNotes.txt
-..\Source\VaultCmd\bin\Release\*.exe
-..\Source\VaultCmd\bin\Release\*.dll
-..\Source\VaultCmd\bin\Release\*.pdb
-..\Source\VaultCmd\VaultCmd.html
+..\Source\AnsVaultCmd\bin\Release\*.exe
+..\Source\AnsVaultCmd\bin\Release\*.dll
+..\Source\AnsVaultCmd\bin\Release\*.pdb
+..\Source\AnsVaultCmd\AnsVaultCmd.html
 LICENSE.txt
 VERIFICATION.txt

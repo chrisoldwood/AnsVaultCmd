@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Mechanisms.Host;
 
-namespace VaultCmd
+namespace AnsVaultCmd
 {
     public class Program
     {

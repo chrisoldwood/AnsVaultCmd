@@ -16,7 +16,7 @@ if not exist "%msbuildFolder%\%msbuildExe%" (
 	exit /b 1
 )
 set msbuild=%msbuildFolder%\%msbuildExe%
-set solution=VaultCmd.sln
+set solution=AnsVaultCmd.sln
 set configuration=Release
 
 if /i "%1" == "debug" set configuration=Debug

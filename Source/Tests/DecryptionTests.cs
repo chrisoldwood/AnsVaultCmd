@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Mechanisms.Tests;
-using VaultCmd;
+using AnsVaultCmd;
 
 namespace Tests
 {

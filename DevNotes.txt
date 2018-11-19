@@ -1,22 +1,22 @@
 Development Structure
 ---------------------
 
-+-VaultCmd
++-AnsVaultCmd
   +-Source
     +-Mechanisms (submodule)
     +-Tests
-    +-VaultCmd
+    +-AnsVaultCmd
 
 The following command will clone the solution, including the submodules:
 
-> git clone --recursive https://github.com/chrisoldwood/VaultCmd.git VaultCmd
+> git clone --recursive https://github.com/chrisoldwood/AnsVaultCmd.git AnsVaultCmd
 
 Command Line Builds
 -------------------
 
 To perform a release build:
 
-> pushd VaultCmd
+> pushd AnsVaultCmd
 > Build
 
 Tests
@@ -35,7 +35,7 @@ The simple .zip file package can be built like so:
 
 The Chocolatey package requires some manual editing to insert the checksum:
 
-> checksum -t sha256 Source\VaultCmd\bin\Release\VaultCmd.exe
+> checksum -t sha256 Source\AnsVaultCmd\bin\Release\AnsVaultCmd.exe
 > notepad Chocolatey\VERIFICATION.txt 
 > BuildChoco
 > TortoiseGitProc /command:export
@@ -51,4 +51,4 @@ Release Checklist
 - Tag repository.
 
 Chris Oldwood 
-19th October 2018
+16th November 2018

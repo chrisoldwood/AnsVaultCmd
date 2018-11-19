@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Tests")]
-[assembly: AssemblyDescription("Tests for the VaultCmd tool")]
+[assembly: AssemblyDescription("Tests for the AnsVaultCmd tool")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Tests")]
-[assembly: AssemblyCopyright("Copyright © Chris Oldwood 2017")]
+[assembly: AssemblyCopyright("Copyright © Chris Oldwood 2017-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
