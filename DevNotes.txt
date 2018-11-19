@@ -38,6 +38,9 @@ The Chocolatey package requires some manual editing to insert the checksum:
 > checksum -t sha256 Source\AnsVaultCmd\bin\Release\AnsVaultCmd.exe
 > notepad Chocolatey\VERIFICATION.txt 
 > BuildChoco
+
+Before zipping the source snapshot, we need a .git free copy:
+
 > TortoiseGitProc /command:export
 
 Release Checklist

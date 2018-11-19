@@ -22,6 +22,12 @@ set configuration=Release
 set suffix=r
 )
 
+:check_built
+if not exist "Source\AnsVaultCmd\bin\%configuration%\AnsVaultCmd.exe" (
+	echo ERROR: '%configuration%' configuration not built.
+	exit /b 1
+)
+
 :build
 if not exist "Packages" mkdir Packages
 if errorlevel 1 exit /b 1
