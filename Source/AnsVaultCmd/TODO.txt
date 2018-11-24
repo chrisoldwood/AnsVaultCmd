@@ -1,5 +1,5 @@
 ﻿- Treat vault file as key/value store.
 
-- Chocolatey package.
+- Read password from stdin or environment variable.
 
-- Read password from stdin.
+- Fail if any unnamed options are provided on the command line.

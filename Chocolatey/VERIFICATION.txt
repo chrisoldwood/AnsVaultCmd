@@ -17,7 +17,7 @@ It can be verified by performing the following:
 3. The checksums should match the following:
 
   type    : sha256
-  checksum: 90BC803BCA5121035CE63FF4ED37D43731621C115CD669D20ACEEB7B49804BDE
+  checksum: 0736B1662E6215F367CE50E259F00937E30184D8B14284363D8E51AEC93D430B
 
 The file 'LICENSE.txt' was obtained from the source code repository at:
 https://github.com/chrisoldwood/AnsVaultCmd/blob/master/Chocolatey/LICENSE.txt
