@@ -17,6 +17,9 @@
     <summary>A command line tool for decrypting Ansible vault files</summary>
     <description>This utility allows you to decrypt Ansible vault files without needing Ansible to be installed, e.g. on Windows hosts.</description>
     <releaseNotes>http://www.chrisoldwood.com/dotnet/ansvaultcmd/relnotes.txt</releaseNotes>
+    <dependencies>
+      <dependency id="dotnet3.5" version="3.5" />
+    </dependencies>
   </metadata>
   <files>
     <file src="bin\**" target="bin" />
