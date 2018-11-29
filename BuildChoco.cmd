@@ -39,6 +39,9 @@ for /f %%f in (PkgList.txt) do (
 )
 
 set packageFolder=..\Packages
+if not exist "%packageFolder%" mkdir "%packageFolder%"
+if errorlevel 1 exit /b 1
+
 choco pack --out "%packageFolder%"
 if %errorlevel% neq 0 popd & exit /b 1
 
