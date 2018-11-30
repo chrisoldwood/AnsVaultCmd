@@ -3,5 +3,5 @@
 ..\Source\AnsVaultCmd\bin\Release\*.dll
 ..\Source\AnsVaultCmd\bin\Release\*.pdb
 ..\Source\AnsVaultCmd\AnsVaultCmd.html
-LICENSE.txt
+..\LICENSE.txt
 VERIFICATION.txt
