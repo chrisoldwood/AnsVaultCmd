@@ -28,6 +28,9 @@ if not exist "Source\AnsVaultCmd\bin\%configuration%\AnsVaultCmd.exe" (
 	exit /b 1
 )
 
+where /q 7z
+if !errorlevel! neq 0 goto :7zip_missing
+
 :build
 if not exist "Packages" mkdir Packages
 if errorlevel 1 exit /b 1
@@ -39,14 +42,26 @@ Get-ChildItem .\Source\AnsVaultCmd\bin\%configuration%\AnsVaultCmd.exe ^|^
  ForEach { $_ -replace '\.','' }
 for /f "usebackq" %%v in (`PowerShell "%getVersion%"`) do set version=%%v
 
-set zipfile=Packages\ansvaultcmd-%version%%suffix%.zip
-set filelist=PkgList.%configuration%.txt
+set zipdir=Packages
+set zipfile=%zipdir%\ansvaultcmd-%version%%suffix%.zip
+set pkglist=PkgList.txt
+set filelist=%zipdir%\FileList.txt
 
-if exist "%zipfile%" del "%zipfile%"
-if errorlevel 1 popd & exit /b 1
+if exist "%filelist%" del "%filelist%" || exit /b 1
+if exist "%zipfile%" del "%zipfile%" || exit /b 1
 
-7za a -tzip -bd %zipfile% @%filelist%
-if errorlevel 1 popd & exit /b 1
+for /f %%l in (%pkglist%) do (
+    set "file=%%l"
+    set "file=!file:${BUILD}=%configuration%!"
+    set "file=!file:${PLATFORM}=%platform%!"
+    if not exist "!file!" (
+        echo ERROR: Package file missing: "!file!"
+        exit /b 1
+    )
+    echo !file!>>"%filelist%" || exit /b
+)
+
+7z a -tzip -bd %zipfile% @%filelist% || exit /b 1
 
 :success
 exit /b 0
@@ -55,3 +70,8 @@ exit /b 0
 echo.
 echo Usage: %~n0 [debug ^| release]
 goto :eof
+
+:7zip_missing
+echo ERROR: 7z not installed or on the PATH.
+echo You can install it with 'choco install -y 7zip'.
+exit /b !errorlevel!

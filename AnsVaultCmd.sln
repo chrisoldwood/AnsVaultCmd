@@ -17,10 +17,21 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{F207F584-6C40-40AE-9824-E31DC2CB5AB6}"
 	ProjectSection(SolutionItems) = preProject
 		Build.cmd = Build.cmd
-		BuildZip.cmd = BuildZip.cmd
 		Clean.cmd = Clean.cmd
-		PkgList.Debug.txt = PkgList.Debug.txt
-		PkgList.Release.txt = PkgList.Release.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZIP", "ZIP", "{2F8E224D-2A22-4ADA-810E-0DD7FEBF7BF0}"
+	ProjectSection(SolutionItems) = preProject
+		BuildZip.cmd = BuildZip.cmd
+		PkgList.txt = PkgList.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chocolatey", "Chocolatey", "{F0F30472-C550-4675-BB8F-4FD6AD94AA94}"
+	ProjectSection(SolutionItems) = preProject
+		Chocolatey\ansvaultcmd.nuspec = Chocolatey\ansvaultcmd.nuspec
+		BuildChoco.cmd = BuildChoco.cmd
+		Chocolatey\PkgList.txt = Chocolatey\PkgList.txt
+		Chocolatey\VERIFICATION.txt = Chocolatey\VERIFICATION.txt
 	EndProjectSection
 EndProject
 Global
@@ -44,5 +55,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2F8E224D-2A22-4ADA-810E-0DD7FEBF7BF0} = {F207F584-6C40-40AE-9824-E31DC2CB5AB6}
+		{F0F30472-C550-4675-BB8F-4FD6AD94AA94} = {F207F584-6C40-40AE-9824-E31DC2CB5AB6}
 	EndGlobalSection
 EndGlobal

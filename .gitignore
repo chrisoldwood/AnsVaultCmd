@@ -6,4 +6,5 @@ obj
 *.user
 
 # Packaging
+/Chocolatey/ansiblevaultcmd.1.0.nupkg
 /Packages

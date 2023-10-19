@@ -1,6 +1,0 @@
-.\ReadMe.txt
-.\RelNotes.txt
-.\Source\AnsVaultCmd\bin\Release\*.exe
-.\Source\AnsVaultCmd\bin\Release\*.dll
-.\Source\AnsVaultCmd\bin\Release\*.pdb
-.\Source\AnsVaultCmd\AnsVaultCmd.html

@@ -1,0 +1,6 @@
+.\ReadMe.txt
+.\RelNotes.txt
+.\Source\AnsVaultCmd\bin\${BUILD}\*.exe
+.\Source\AnsVaultCmd\bin\${BUILD}\*.dll
+.\Source\AnsVaultCmd\bin\${BUILD}\*.pdb
+.\Source\AnsVaultCmd\AnsVaultCmd.html
