@@ -3,3 +3,5 @@
 - Read password from stdin or environment variable.
 
 - Fail if any unnamed options are provided on the command line.
+
+- Add a couple of end-to-end tests.

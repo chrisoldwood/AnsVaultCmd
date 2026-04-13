@@ -61,7 +61,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TODO.txt" />
     <Content Include="AnsVaultCmd.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
