@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnsVaultCmd", "Source\AnsVaultCmd\AnsVaultCmd.csproj", "{8D20F8DC-F081-40A2-8B45-B376A56D7A7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnsVaultCmd", "Source\AnsVaultCmd\AnsVaultCmd.vs2008.csproj", "{8D20F8DC-F081-40A2-8B45-B376A56D7A7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Source\Tests\Tests.csproj", "{CB9B0623-41E6-444D-9DFC-4A94CAAEBC99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Source\Tests\Tests.vs2008.csproj", "{CB9B0623-41E6-444D-9DFC-4A94CAAEBC99}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mechanisms", "Source\Mechanisms\Source\Mechanisms\Mechanisms.vs2008.csproj", "{0A7BA255-4199-411C-A27A-8DF791D0AB8D}"
 EndProject

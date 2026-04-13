@@ -56,7 +56,7 @@
       <Project>{0A7BA255-4199-411C-A27A-8DF791D0AB8D}</Project>
       <Name>Mechanisms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AnsVaultCmd\AnsVaultCmd.csproj">
+    <ProjectReference Include="..\AnsVaultCmd\AnsVaultCmd.vs2008.csproj">
       <Project>{8D20F8DC-F081-40A2-8B45-B376A56D7A7A}</Project>
       <Name>AnsVaultCmd</Name>
     </ProjectReference>
