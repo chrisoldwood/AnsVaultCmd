@@ -14,10 +14,10 @@ The following command will clone the solution, including the submodules:
 Command Line Builds
 -------------------
 
-To perform a release build:
+To perform a release build for .Net 3.5:
 
-> pushd AnsVaultCmd
-> Build
+> .\Clean --all
+> .\Build
 
 Tests
 -----
@@ -29,20 +29,20 @@ You can run the unit tests with:
 Packages
 --------
 
-The simple .zip file package can be built like so:
+The simple .zip file package can be built using 7-Zip like so:
 
-> BuildZip
+> .\BuildZip
 
 The Chocolatey package requires some manual editing to insert the checksum:
 
 > checksum -t sha256 Source\AnsVaultCmd\bin\Release\AnsVaultCmd.exe
 > notepad Chocolatey\VERIFICATION.txt 
-> BuildChoco
+> .\BuildChoco
 
 Before zipping the source snapshot, we need a .git free copy:
 
-> clean --all
-> 7za a -tzip -bd Packages\ansvaultcmd-100s.zip . -xr!.git -xr!bin -xr!obj -xr!Packages
+> .\Clean --all
+> 7za a -tzip -bd Packages\ansvaultcmd-100s.zip . "-xr!.git" "-xr!bin" "-xr!obj" "-xr!Packages"
 
 Release Checklist
 -----------------
@@ -55,4 +55,4 @@ Release Checklist
 - Tag repository.
 
 Chris Oldwood 
-16th November 2018
+13th April 2026
