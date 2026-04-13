@@ -39,6 +39,11 @@ The answer by "Peter O." includes a code snippet which I used almost verbatim.
 
 https://stackoverflow.com/a/18649357/106119
 
+Development
+-----------
+
+See DevNotes.txt.
+
 Contact Details
 ---------------
 
