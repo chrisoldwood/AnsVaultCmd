@@ -27,7 +27,11 @@ using System.Security.Cryptography;
 public class Aes128CounterMode : SymmetricAlgorithm
 {
     private readonly byte[] _counter;
+#if NET6_0_OR_GREATER
+    private readonly Aes _aes;
+#else
     private readonly AesManaged _aes;
+#endif
 
     public Aes128CounterMode(byte[] counter)
     {
@@ -36,11 +40,13 @@ public class Aes128CounterMode : SymmetricAlgorithm
             throw new ArgumentException(String.Format("Counter size must be same as block size (actual: {0}, expected: {1})",
                 counter.Length, 16));
 
-        _aes = new AesManaged
-        {
-            Mode = CipherMode.ECB,
-            Padding = PaddingMode.None
-        };
+#if NET6_0_OR_GREATER
+        _aes = Aes.Create();
+#else
+        _aes = new AesManaged();
+#endif
+        _aes.Mode = CipherMode.ECB;
+        _aes.Padding = PaddingMode.None;
 
         _counter = counter;
     }

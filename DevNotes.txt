@@ -19,12 +19,20 @@ To perform a release build for .Net 3.5:
 > .\Clean --all
 > .\Build
 
+For .Net Core use:
+
+> dotnet build AnsVaultCmd.net20.slnx
+
 Tests
 -----
 
-You can run the unit tests with:
+You can run the .Net 3.5 version unit tests with:
 
 > Source\Tests\bin\Release\Tests.exe
+
+For .Net Core use:
+
+> dotnet run --project Source\Tests\Tests.net20.csproj
 
 Packages
 --------

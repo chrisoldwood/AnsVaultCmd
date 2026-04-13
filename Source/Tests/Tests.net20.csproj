@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Tests</AssemblyName>
+    <TargetFramework>net10.0</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Mechanisms/Source/Mechanisms/Mechanisms.net20.csproj" />
+    <ProjectReference Include="../AnsVaultCmd/AnsVaultCmd.net20.csproj" />
+  </ItemGroup>
+
+</Project>

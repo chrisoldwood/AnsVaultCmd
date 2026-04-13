@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Source/Mechanisms/Source/Mechanisms/Mechanisms.net20.csproj" />
+  <Project Path="Source/AnsVaultCmd/AnsVaultCmd.net20.csproj" />
+  <Project Path="Source/Tests/Tests.net20.csproj" />
+</Solution>
