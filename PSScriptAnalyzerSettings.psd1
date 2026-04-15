@@ -1,7 +1,7 @@
 @{
     Rules = @{
         PSAvoidUsingCmdletAliases = @{
-            AllowList = @('foreach', 'measure', 'select', 'where')
+            AllowList = @('foreach', 'measure', 'select', 'sort', 'where')
         }
     }
 }
