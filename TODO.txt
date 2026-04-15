@@ -4,4 +4,4 @@
 
 - Fail if any unnamed options are provided on the command line.
 
-- Add a couple of end-to-end tests.
+- Fix the double "ERROR:" prefix when no arguments are specified.

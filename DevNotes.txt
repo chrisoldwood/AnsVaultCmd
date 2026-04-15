@@ -23,8 +23,8 @@ For .Net Core use:
 
 > dotnet build AnsVaultCmd.net20.slnx
 
-Tests
------
+Unit Tests
+----------
 
 You can run the .Net 3.5 version unit tests with:
 
@@ -33,6 +33,14 @@ You can run the .Net 3.5 version unit tests with:
 For .Net Core use:
 
 > dotnet run --project Source\Tests\Tests.net20.csproj
+
+End-to-End Tests
+----------------
+
+There is a PowerShell script containing some Pester based tests which invokes
+the binary with a number of scenarios: 
+
+PS> Source\Tests\EndToEnd.Tests.ps1
 
 Packages
 --------
