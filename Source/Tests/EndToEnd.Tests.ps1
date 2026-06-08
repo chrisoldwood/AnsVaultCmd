@@ -1,18 +1,24 @@
 Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
 
 if ($PSVersionTable.PSVersion.Major -lt 6) {
-    Write-Error "This script requires PowerShell 6.0+ but the current version is: $($PSVersionTable.PSVersion)"
+    Write-Host "ERROR: This script requires PowerShell 6.0+ but the current version is: $($PSVersionTable.PSVersion)" -ForegroundColor Red
     exit 1
 }
 
-$ErrorActionPreference = 'Stop'
-
+$binary = if ($IsWindows) { 'AnsVaultCmd.exe' } else { 'AnsVaultCmd' }
+$binMatch = if ($IsWindows) { '*\bin\*' } else { '*/bin/*' }
 $root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
-$program = Get-ChildItem -r "$root\AnsVaultCmd.exe" |
-            where { $_ -like '*\bin\*' } |
+$program = Get-ChildItem -r "$root\$binary" |
+            where { $_ -like $binMatch } |
             Sort-Object -Desc LastWriteTime |
             select -First 1 |
             foreach FullName
+
+if (-not $program) {
+    Write-Host "ERROR: Failed to find binary '$binary' under '$root...$binMatch'" -ForegroundColor Red
+    exit 1
+}
 
 $plainTextFile = Join-Path $root 'Source\Tests\TestFiles\text-plaintext.txt'
 $plainText = Get-Content -Raw $plainTextFile
