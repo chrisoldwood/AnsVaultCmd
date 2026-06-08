@@ -28,8 +28,8 @@ Describe 'Program Usage' {
 
         $stdout = & "$program" | Out-String
 
-        $LastExitCode | Should Be 1
-        $stdout | Should Match 'USAGE'
+        $LastExitCode | Should -Be 1
+        $stdout | Should -Match 'USAGE'
     }
 
     $HelpFlags = @(
@@ -41,8 +41,8 @@ Describe 'Program Usage' {
 
         $stdout = & "$program" $helpFlag | Out-String
 
-        $LastExitCode | Should Be 0
-        $stdout | Should Match 'USAGE'
+        $LastExitCode | Should -Be 0
+        $stdout | Should -Match 'USAGE'
     }
 }
 
@@ -52,9 +52,9 @@ Describe 'Program Version' {
 
         $stdout = & "$program" '--version' | Out-String -NoNewline
 
-        $LastExitCode | Should Be 0
-        $stdout | measure | foreach Count | Should Be 1
-        $stdout | Should Match '^\d+\.\d+\.\d+\.\d+$'
+        $LastExitCode | Should -Be 0
+        $stdout | measure | foreach Count | Should -Be 1
+        $stdout | Should -Match '^\d+\.\d+\.\d+\.\d+$'
     }
 }
 
@@ -69,8 +69,8 @@ Describe 'Decryption' {
 
         $stdout = $stdin | & "$program" 2>&1 | Out-String
 
-        $LastExitCode | Should Be 1
-        $stdout | select -First 1 | Should Match 'ERROR: No vault password specified'
+        $LastExitCode | Should -Be 1
+        $stdout | select -First 1 | Should -Match 'ERROR: No vault password specified'
     }
 
     It 'Decrypts the contents of stdin to stdout by default using the password provided' {
@@ -78,16 +78,16 @@ Describe 'Decryption' {
 
         $stdout = $stdin | & "$program" '--password' 'password' | Out-String -NoNewline
 
-        $LastExitCode | Should Be 0
-        $stdout | Should BeExactly $plainText
+        $LastExitCode | Should -Be 0
+        $stdout | Should -BeExactly $plainText
     }
 
     It 'Decrypts the contents of the input file to stdout using the password provided' {
 
         $stdout = & "$program" '--password' 'password' '--infile' $cipherTextFile | Out-String -NoNewline
 
-        $LastExitCode | Should Be 0
-        $stdout | Should BeExactly $plainText
+        $LastExitCode | Should -Be 0
+        $stdout | Should -BeExactly $plainText
     }
 
     It 'Decrypts the contents of stdin to the output file using the password provided' {
@@ -95,18 +95,18 @@ Describe 'Decryption' {
 
         $stdout = $stdin | & "$program" '--password' 'password' '--outfile' $tempFile | Out-String -NoNewline
 
-        $LastExitCode | Should Be 0
-        $stdout | Should BeNullOrEmpty
-        $tempFile | Should Contain $plainText
+        $LastExitCode | Should -Be 0
+        $stdout | Should -BeNullOrEmpty
+        $tempFile | Should -FileContentMatch $plainText
     }
 
     It 'Decrypts the contents of the input file to the output file using the password provided' {
 
         $stdout = & "$program" '--password' 'password' '--infile' $cipherTextFile '--outfile' $tempFile | Out-String -NoNewline
 
-        $LastExitCode | Should Be 0
-        $stdout | Should BeNullOrEmpty
-        $tempFile | Should Contain $plainText
+        $LastExitCode | Should -Be 0
+        $stdout | Should -BeNullOrEmpty
+        $tempFile | Should -FileContentMatch $plainText
     }
 
     It 'Ignores the contents of stdin when an input file has been specified' {
@@ -114,8 +114,8 @@ Describe 'Decryption' {
 
         $stdout = $stdin | & "$program" '--password' 'password' '--infile' $cipherTextFile '--outfile' $tempFile | Out-String -NoNewline
 
-        $LastExitCode | Should Be 0
-        $stdout | Should BeNullOrEmpty
-        $tempFile | Should Contain $plainText
+        $LastExitCode | Should -Be 0
+        $stdout | Should -BeNullOrEmpty
+        $tempFile | Should -FileContentMatch $plainText
     }
 }

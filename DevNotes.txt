@@ -42,6 +42,11 @@ the binary with a number of scenarios:
 
 PS> Source\Tests\EndToEnd.Tests.ps1
 
+Note: this requires Pester v4+ (PowerShell comes with v3 by default), so upgrade
+using the following:
+
+PS> Install-Module -Name Pester -Force
+
 Packages
 --------
 
