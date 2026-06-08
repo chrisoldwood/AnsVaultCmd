@@ -1,7 +1,11 @@
+Set-StrictMode -Version Latest
+
 if ($PSVersionTable.PSVersion.Major -lt 6) {
     Write-Error "This script requires PowerShell 6.0+ but the current version is: $($PSVersionTable.PSVersion)"
     exit 1
 }
+
+$ErrorActionPreference = 'Stop'
 
 $root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $program = Get-ChildItem -r "$root\AnsVaultCmd.exe" |
@@ -15,7 +19,7 @@ $plainText = Get-Content -Raw $plainTextFile
 $cipherTextFile = Join-Path $root 'Source\Tests\TestFiles\text-ciphertext.txt'
 
 $tempFolder = Join-Path $root 'Source\Tests\temp'
-if (-not (Test-Path $tempFolder)) { mkdir -Path $tempFolder | Out-Null }
+if (-not (Test-Path $tempFolder)) { New-Item -ItemType Directory -Path $tempFolder | Out-Null }
 $tempFile = Join-Path $tempFolder 'AnsVaultCmd-Output.txt'
 
 Describe 'Program Usage' {
