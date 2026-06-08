@@ -1,7 +1,8 @@
 @{
     Rules = @{
+        # Don't allow 'sort' as it doesn't work on Linux.
         PSAvoidUsingCmdletAliases = @{
-            AllowList = @('foreach', 'measure', 'select', 'sort', 'where')
+            AllowList = @('foreach', 'measure', 'select', 'where')
         }
     }
 }

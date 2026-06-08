@@ -6,14 +6,17 @@ if ($PSVersionTable.PSVersion.Major -lt 6) {
 $root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $program = Get-ChildItem -r "$root\AnsVaultCmd.exe" |
             where { $_ -like '*\bin\*' } |
-            sort -Desc LastWriteTime |
+            Sort-Object -Desc LastWriteTime |
             select -First 1 |
             foreach FullName
 
 $plainTextFile = Join-Path $root 'Source\Tests\TestFiles\text-plaintext.txt'
 $plainText = Get-Content -Raw $plainTextFile
 $cipherTextFile = Join-Path $root 'Source\Tests\TestFiles\text-ciphertext.txt'
-$tempFile = Join-Path $env:TEMP 'AnsVaultCmd-Output.txt'
+
+$tempFolder = Join-Path $root 'Source\Tests\temp'
+if (-not (Test-Path $tempFolder)) { mkdir -Path $tempFolder | Out-Null }
+$tempFile = Join-Path $tempFolder 'AnsVaultCmd-Output.txt'
 
 Describe 'Program Usage' {
 

@@ -5,6 +5,9 @@ obj
 *.cache
 *.user
 
+# Tests
+Source/Tests/temp
+
 # Packaging
 /Chocolatey/ansiblevaultcmd.1.0.nupkg
 /Packages
