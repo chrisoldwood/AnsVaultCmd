@@ -5,3 +5,5 @@
 - Fail if any unnamed options are provided on the command line.
 
 - Fix the double "ERROR:" prefix when no arguments are specified.
+
+- Fix end-to-end test script on Linux.
