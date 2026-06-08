@@ -1,0 +1,31 @@
+name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '10.x'
+
+      - name: Restore dependencies
+        run: dotnet restore AnsVaultCmd.net20.slnx
+
+      - name: Build code
+        run: dotnet build AnsVaultCmd.net20.slnx --configuration Release --no-restore
+
+      - name: Run unit tests
+        run: dotnet run --project Source/Tests/Tests.net20.csproj --configuration Release --no-build
+
+      - name: Run end-to-end tests
+        run: pwsh -File Source/Tests/EndToEnd.Tests.ps1
