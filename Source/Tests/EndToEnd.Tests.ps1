@@ -26,7 +26,7 @@ Describe 'Program Usage' {
 
     It 'Shows the usage message and exits with a non-zero code when no arguments are provided' {
 
-        $stdout = & "$program" | Out-String
+        $stdout = & "$program" 2>&1 | Out-String
 
         $LastExitCode | Should -Be 1
         $stdout | Should -Match 'USAGE'
